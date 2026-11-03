@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>Mechanoids Can Hunt</name>
+  <author>Jacob / Hermes</author>
+  <packageId>jacob.mechanoidscanhunt</packageId>
+  <supportedVersions>
+    <li>1.7</li>
+  </supportedVersions>
+  <description>Allows eligible mechanoids to perform hunting work.
+
+By default, any mechanoid capable of ranged attacks qualifies for hunting work. Explicit melee combat mechanoids (such as Scythers) can be permitted via configuration, while non-combat or inappropriate mechanoids (such as Cleansweepers) are excluded.
+
+Features:
+- Ranged combat mechanoids are eligible by default when they have a viable ranged attack.
+- Scythers and Tunnelers are explicitly eligible; melee attack behavior is provided by Hunters Use Melee! (Continued).
+- Utility and non-combat mechanoids are excluded by default; ranged-armed combat mechs are not filtered by weapon type.
+- Loads after Mlie.HuntersUseMelee; this mod does not replace its hunting job or melee attack logic.
+  </description>
+  <modDependencies>
+    <li>
+      <packageId>Ludeon.RimWorld.Biotech</packageId>
+      <displayName>Biotech</displayName>
+    </li>
+    <li>
+      <packageId>mlie.huntersusemelee</packageId>
+      <displayName>Hunters Use Melee! (Continued)</displayName>
+      <steamWorkshopUrl>steam://url/CommunityFilePage/2900108163</steamWorkshopUrl>
+    </li>
+  </modDependencies>
+  <loadAfter>
+    <li>Ludeon.RimWorld</li>
+    <li>Ludeon.RimWorld.Biotech</li>
+    <li>mlie.huntersusemelee</li>
+  </loadAfter>
+</ModMetaData>

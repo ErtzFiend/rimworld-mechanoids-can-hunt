@@ -1,0 +1,9 @@
+bin/
+obj/
+1.7/Assemblies/*.dll
+1.7/Assemblies/*.pdb
+*.user
+*.suo
+.vs/
+__pycache__/
+*.py[cod]
