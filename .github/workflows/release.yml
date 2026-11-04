@@ -1,0 +1,46 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Verify compiled assembly
+        run: |
+          if [ ! -f "1.7/Assemblies/MechanoidsCanHunt.dll" ]; then
+            echo "1.7/Assemblies/MechanoidsCanHunt.dll missing!"
+            exit 1
+          fi
+          sha256sum 1.7/Assemblies/MechanoidsCanHunt.dll
+
+      - name: Package Release
+        run: |
+          mkdir -p staging/MechanoidsCanHunt/About
+          mkdir -p staging/MechanoidsCanHunt/Patches
+          mkdir -p staging/MechanoidsCanHunt/1.7/Assemblies
+          cp -r About/* staging/MechanoidsCanHunt/About/
+          cp -r Patches/* staging/MechanoidsCanHunt/Patches/
+          cp 1.7/Assemblies/MechanoidsCanHunt.dll staging/MechanoidsCanHunt/1.7/Assemblies/
+          cd staging
+          zip -r ../MechanoidsCanHunt.zip MechanoidsCanHunt
+          cd ..
+          unzip -l MechanoidsCanHunt.zip
+          sha256sum MechanoidsCanHunt.zip
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: MechanoidsCanHunt.zip
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
